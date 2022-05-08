@@ -1,0 +1,68 @@
+<audio id="muteme"></audio>
+<button id="start">START</button>
+<button id="ss">LIVE START</button>
+<button id="ee">LIVE END</button>
+<button id="next">NEXT</button>
+<div id="tracks">
+	<audio loop><source src="./Maroon Line Voice Clips/4 North Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/1 Maroon Line Opening.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/2 Pick Hall Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/2 Pick Hall Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/3 Reynolds Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/3 Reynolds Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/4 North Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/5 BSLC Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/5 BSLC Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/6 Maryland Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/6 Maryland Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/7 Jones Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/9 Harper Terminus.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/7Jones Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/8 Classics Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/8 Classics Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/9 Harper Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/9 Harper Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/Soliciting Gambling.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/Be Considerate.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/Doors Closing Long.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/Doors Closing Short.wav"></audio>
+	<audio loop><source src="./Maroon Line Voice Clips/Maroon Line 1895.wav"></audio>
+</div>
+<script>
+	let micstream, astream, timeoutid;
+	let track_idx = 0;
+	document.getElementById("next").addEventListener("click", function() {
+			let audio = document.getElementById("tracks").children[track_idx];
+			audio.pause();
+			audio.currentTime = 0;
+			track_idx = track_idx + 1;
+			document.getElementById("tracks").children[track_idx].play();
+		});
+	function playtrack() {
+		}
+	document.getElementById("start").addEventListener("click", function() {
+		navigator.mediaDevices.getUserMedia({ audio: true })
+			.then(function (mediaStreamObj) {
+				micstream = mediaStreamObj;
+				let a = document.getElementById("muteme");
+				a.srcObject = mediaStreamObj;
+				a.play();
+
+			document.getElementById("muteme").pause();
+				let audio = document.getElementById("tracks").children[track_idx];
+				audio.play();
+		});
+	});
+
+	document.getElementById("ss").addEventListener("click", function() {
+			document.getElementById("muteme").play();
+			let audio = document.getElementById("tracks").children[track_idx];
+			audio.pause();
+			audio.currentTime = 0;
+		});
+	document.getElementById("ee").addEventListener("click", function() {
+			document.getElementById("muteme").pause();
+			document.getElementById("tracks").children[track_idx].play();
+		});
+</script>
+
